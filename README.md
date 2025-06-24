@@ -1,6 +1,37 @@
 # tst_next_todo_prisma
 Test project: todo list based on next.js and prisma
 
+## Based on lesson:
+[Youtube: ASMR Coding: Building the Most Satisfying NEXT.JS Todo App](https://www.youtube.com/watch?v=Uo3Rthw3IfE)
+
+```bash
+npm run dev
+```
+
+
+### Commands during project:
+```sh
+npx create-next-app@latest .
+npm install prisma @prisma/client
+npm run dev
+npx prisma init
+
+git add .
+git commit -m 'first + prisma'
+git branch -M master
+git remote add origin git@github.com:dev-phoenix/tst_next_todo_prisma.git
+
+npx prisma db push
+npx prisma generate
+
+npx prisma studio
+```
+
+### Result:
+![preview](./imgs/prev.png)
+
+<!--
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -37,3 +68,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-->

@@ -18,15 +18,22 @@ const Home = () => {
   }, [])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault()
     setInputValue(e.target.value)
-    console.log(inputValue)
+    // console.log(inputValue)
   }
 
-  const handleAddTodo = async () => {
+  const handleAddTodo = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
     await addTodo(inputValue);
+    fetchTodos();
+    return false
   }
-  const handleTodoDelete = async (id: number) => {
+  const handleTodoDelete = async (event: React.ChangeEvent<HTMLInputElement>, id: number) => {
+    event.preventDefault()
     await deleteTodo(id);
+    fetchTodos();
+    return false
   }
 
   return (
@@ -57,7 +64,7 @@ const Home = () => {
           <div key={todo.id} className="flex items-center justify-between w-full mt-4">
             <p>{todo.name}</p>
             <button
-              onClick={() => handleTodoDelete(todo.id)}
+              onClick={(e: React.ChangeEvent<HTMLInputElement>) => handleTodoDelete(e, todo.id)}
               className='rounded-md border p-2 border-[#372aac]'
               >Delete</button>
           </div>

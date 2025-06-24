@@ -11,7 +11,7 @@ export const addTodo = async (task: string) => {
             }
         })
 
-        revalidatePath("/")
+        // revalidat    ePath("/")
         return {
             result: true,
             message: "Task added successfully!"
@@ -39,7 +39,7 @@ export const deleteTodo = async (id: number) => {
         
         await prisma.todo.delete({ where: { id } })
 
-        revalidatePath("/")
+        // revalidatePath("/")
         return {
             result: true,
             message: "Task deleted successfully!"
