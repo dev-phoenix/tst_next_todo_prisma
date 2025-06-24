@@ -1,15 +1,33 @@
 "use client";
 
-import React, { useState } from 'react'
+import { Todo } from "@prisma/client";
+import React, { useEffect, useState } from 'react'
+import { addTodo, deleteTodo, getAllTodos } from "./todo";
 
 const Home = () => {
   const [inputValue, setInputValue] = useState("");
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const fetchTodos = async () => {
+    const res = await getAllTodos();
+    setTodos(res);
+  }
+
+  useEffect(() => {
+    fetchTodos();
+  }, [])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
     console.log(inputValue)
   }
 
+  const handleAddTodo = async () => {
+    await addTodo(inputValue);
+  }
+  const handleTodoDelete = async (id: number) => {
+    await deleteTodo(id);
+  }
 
   return (
     <div className='h-screen w-screen flex flex-col items-center justify-center'>
@@ -26,8 +44,25 @@ const Home = () => {
           value={inputValue}
           onChange={onChange}/>
         </div>
-        <button type='submit' className='mt-4 rounded-md border p-2 w-full bg-indigo-300 border-indigo-800 font-color-black'>Add</button>
+        <button
+          type='submit'
+          className='mt-4 rounded-md border p-2 w-full bg-indigo-300 border-indigo-800 font-color-black'
+          onClick={handleAddTodo}
+          >Add</button>
       </form>
+
+      {/** Todos list */}
+      <div className="mt-8 flex flex-col w-[240px]">
+        {todos.map((todo) => (
+          <div key={todo.id} className="flex items-center justify-between w-full mt-4">
+            <p>{todo.name}</p>
+            <button
+              onClick={() => handleTodoDelete(todo.id)}
+              className='rounded-md border p-2 border-[#372aac]'
+              >Delete</button>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
